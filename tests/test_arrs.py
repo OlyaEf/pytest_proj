@@ -1,9 +1,14 @@
 from utils import arrs
+import pytest
 
 
-def test_get():
-    assert arrs.get([1, 2, 3], 1, "test") == 3
-    assert arrs.get([], 0, "test") == "test"
+@pytest.mark.parametrize('get, index, default, expected', [
+    ([1, 2, 3], 1, 'default', 2),
+    ([1, 2, 3], -1, 'default', 'default'),
+    ([1, 2, 3], 0, 'default', 1)
+])
+def test_get(get, index, default, expected):
+    assert arrs.get(get, index, default) == expected
 
 
 def test_slice():
